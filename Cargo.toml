@@ -3,4 +3,9 @@ name = "projector-ts-rust-go"
 version = "0.1.0"
 edition = "2021"
 
+[[bin]]
+name = "projector"
+path = "src/projector-rust/bin/projector.rs"
+
+
 [dependencies]
