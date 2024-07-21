@@ -5,8 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "go-run": "go run ./src/projector-go/cmd/main.go",
-    
+    "go-run": "go run ./src/projector-go/cmd/main.go"
+
   },
   "author": "",
   "license": "ISC",
