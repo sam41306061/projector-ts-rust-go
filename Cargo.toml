@@ -1,5 +1,5 @@
 [package]
-name = "projector-ts-rust-go"
+name = "projector"
 version = "0.1.0"
 edition = "2021"
 
@@ -9,3 +9,5 @@ path = "src/projector-rust/bin/projector.rs"
 
 
 [dependencies]
+anyhow = "1.0.57"
+clap = { version = "4.5.11", features = ["derive"] }

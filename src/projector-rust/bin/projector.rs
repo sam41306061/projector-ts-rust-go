@@ -1,3 +1,6 @@
+use clap::Parser;
+use projector::opts::Opts;
 fn main() {
-    println!("Hello, world!");
+   let opts = Opts::parse();
+   println!("{:?}", opts)
 }
