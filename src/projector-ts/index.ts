@@ -1,5 +1,2 @@
-const HelloWorld = () => {
-    let text = "Hello World"
-    console.log(text);
-}
-HelloWorld();
+import getOpts from "../../opts";
+console.log(getOpts());

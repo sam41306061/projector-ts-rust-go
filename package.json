@@ -6,12 +6,13 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "go-run": "go run ./src/projector-go/cmd/main.go"
-
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@types/command-line-args": "^5.2.3",
     "@types/node": "^20.14.11",
+    "command-line-args": "^6.0.0",
     "ts-node": "^10.9.2",
     "typescript": "^5.5.3"
   }
