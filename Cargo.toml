@@ -3,10 +3,12 @@ name = "projector"
 version = "0.1.0"
 edition = "2021"
 
+# Assuming your library is directly under src/, not nested
+path = "src/bin/projector.rs"
+
 [[bin]]
 name = "projector"
-path = "src/projector-rust/bin/projector.rs"
-
+path = "src/bin/projector.rs"
 
 [dependencies]
 anyhow = "1.0.57"

@@ -1,0 +1,1 @@
+/Users/sam4130/Documents/GitHub/projector-ts-rust-go/target/debug/projector: /Users/sam4130/Documents/GitHub/projector-ts-rust-go/src/bin/projector.rs /Users/sam4130/Documents/GitHub/projector-ts-rust-go/src/lib.rs /Users/sam4130/Documents/GitHub/projector-ts-rust-go/src/opts.rs
