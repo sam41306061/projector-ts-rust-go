@@ -4,7 +4,7 @@
   "description": "polygot programming cli project",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "jest",
     "go-run": "go run ./src/projector-go/cmd/main.go"
   },
   "author": "",
@@ -15,5 +15,12 @@
     "command-line-args": "^6.0.0",
     "ts-node": "^10.9.2",
     "typescript": "^5.5.3"
+  },
+  "devDependencies": {
+    "@babel/preset-env": "^7.25.3",
+    "@babel/preset-typescript": "^7.24.7",
+    "@types/jest": "^29.5.12",
+    "jest": "^29.7.0",
+    "ts-jest": "^29.2.4"
   }
 }
