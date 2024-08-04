@@ -96,15 +96,12 @@ fn get_pwd(pwd: Option<PathBuf>) -> Result<PathBuf> {
     return std::env::current_dir().context("unable to get std::env::current_dir");
 }
 
-#[cfg(test)]
-#[cfg(test)]
+// ****** TESTING ******* //
 #[cfg(test)]
 mod test {
     use anyhow::Result;
 
     use crate::{config::Config, config::Operation, opts::Opts};
-
-    use super::get_config;
 
     #[test]
     fn test_print() -> Result<()> {
@@ -166,22 +163,4 @@ mod test {
 
         return Ok(());
     }
-
-    //#[test]
-    // fn test_add() -> Result<()> {
-    //     let opts: Config = Opts {
-    //         config: None,
-    //         pwd: None,
-    //         args: vec!["add".to_string(), "foo".into(), String::from("bar")],
-    //     };
-
-    //     let config = get_config(opts)?;
-
-    //     assert_eq!(
-    //         config.operation,
-    //         Operation::Add((String::from("foo"), String::from("bar")))
-    //     );
-
-    //     return Ok(());
-    // }
 }
