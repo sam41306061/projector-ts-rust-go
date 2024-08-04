@@ -56,12 +56,14 @@ export class Projector {
   }
 
   static fromConfig(config: Config): Projector {
+    //@ts-ignore
     let data: ProjectorData = undefined;
     try {
       if (fs.existsSync(config.config)) {
         data = JSON.parse(fs.readFileSync(config.config).toString());
       }
     } catch {
+      //@ts-ignore
       data = undefined;
     }
 
