@@ -12,7 +12,7 @@ test("print key", function () {
   expect(config.operation).toEqual(Operation.Print);
   expect(config.args).toEqual(["foo"]);
 });
-test("add key", function () {
+test("should create an add projector config", function () {
   const config = getConfigPath({
     args: ["add", "foo", "bar"],
   });
@@ -20,10 +20,10 @@ test("add key", function () {
   expect(config.args).toEqual(["foo", "bar"]);
 });
 
-test("remove key", function () {
+test("should remove a projector from config", function () {
   const config = getConfigPath({
     args: ["remove", "foo"],
   });
   expect(config.operation).toEqual(Operation.Remove);
-  expect(config.args).toEqual(["foo", "bar"]);
+  expect(config.args).toEqual(["foo"]);
 });
