@@ -16,6 +16,13 @@ type Projector struct {
 	data *Data
 }
 
+func CreateProjector(config *Config, data *Data) *Projector {
+	return &Projector{
+		config: config,
+		data: data,
+	}
+}
+
 func (p *Projector) GetValue(key string) (string, bool) {
 	cur := p.config.Pwd
 	prev := ""
