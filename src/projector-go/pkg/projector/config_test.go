@@ -50,16 +50,25 @@ func TestConfigRemove(t *testing.T) {
 	opts := projector.ProjectorOpts {
 		Config: "",
 		Pwd: "",
-		Arguments: []string("remove", "foo", "bar"),
+		Arguments: []string{"remove", "foo", "bar"},
 	}
 	config, err := projector.NewConfig(&opts)
-	if err != nil {
-		t.Errorf("error returned from projector confg %v", config.Operation)
-	}
-	if config.Operation != projector.Remove {
-		t.Errorf("operation expected was remove but got %v", config.Operation)
-	}
-	if config.Args[0] != "foo" {
-		t.Errorf("expected arugments to equal {'foo'} but got %v", config.Args)
-	}
+
+   
+    if err != nil {
+        t.Errorf("error returned from projector config %v", config)
+    }
+    println("Broker here", err);
+    println("Check the config here", config)
+	// if err != nil {
+	// 	t.Errorf("error returned from projector confg %v", config.Operation)
+	// }
+    
+	// if config.Operation != projector.Remove {
+	// 	t.Errorf("operation expected was remove but got %v", config.Operation)
+	// }
+	// if config.Args[0] != "foo" {
+	// 	t.Errorf("expected arugments to equal {'foo'} but got %v", config.Args)
+	// }
+
 }

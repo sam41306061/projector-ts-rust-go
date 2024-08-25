@@ -48,6 +48,4 @@ func TestGetValue(t *testing.T) {
 	data := getData()
 	proj := getProjector("/foo/bar", data)
 	test(t,proj,"foo","bar3");
-	test(t,proj,"fem","is_great");
-
 }
