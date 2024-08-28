@@ -3,6 +3,7 @@ package projector_test
 import (
 	"testing"
 
+	"log"
 	"projects/projector-go/src/projector-go/pkg/projector"
 )
 
@@ -53,22 +54,18 @@ func TestConfigRemove(t *testing.T) {
 		Arguments: []string{"remove", "foo", "bar"},
 	}
 	config, err := projector.NewConfig(&opts)
+    log.Printf("Error: %v", err)
+    log.Printf("Config: %v", config)
+    log.Printf("Args: %v", config.Args)
+    log.Printf("Args: %v", config.Args[0])
 
-   
+
     if err != nil {
-        t.Errorf("error returned from projector config %v", config)
+        t.Errorf("error returned from projector config %v", err)
     }
-    println("Broker here", err);
-    println("Check the config here", config)
-	// if err != nil {
-	// 	t.Errorf("error returned from projector confg %v", config.Operation)
-	// }
-    
-	// if config.Operation != projector.Remove {
-	// 	t.Errorf("operation expected was remove but got %v", config.Operation)
-	// }
-	// if config.Args[0] != "foo" {
-	// 	t.Errorf("expected arugments to equal {'foo'} but got %v", config.Args)
-	// }
+
+    if config.Operation != projector.Remove {
+        t.Errorf("operation expected was remove but got %v", config.Operation)
+    }
 
 }
