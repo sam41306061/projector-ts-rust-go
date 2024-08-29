@@ -1,0 +1,10 @@
+/Users/sam4130/Documents/GitHub/projector-ts-rust-go/target/debug/deps/libcollection_macros-f409ebb73144a25e.rmeta: /Users/sam4130/.cargo/registry/src/index.crates.io-6f17d22bba15001f/collection_macros-0.2.0/src/lib.rs /Users/sam4130/.cargo/registry/src/index.crates.io-6f17d22bba15001f/collection_macros-0.2.0/src/hashmap.rs /Users/sam4130/.cargo/registry/src/index.crates.io-6f17d22bba15001f/collection_macros-0.2.0/src/btreemap.rs /Users/sam4130/.cargo/registry/src/index.crates.io-6f17d22bba15001f/collection_macros-0.2.0/src/hashset.rs
+
+/Users/sam4130/Documents/GitHub/projector-ts-rust-go/target/debug/deps/libcollection_macros-f409ebb73144a25e.rlib: /Users/sam4130/.cargo/registry/src/index.crates.io-6f17d22bba15001f/collection_macros-0.2.0/src/lib.rs /Users/sam4130/.cargo/registry/src/index.crates.io-6f17d22bba15001f/collection_macros-0.2.0/src/hashmap.rs /Users/sam4130/.cargo/registry/src/index.crates.io-6f17d22bba15001f/collection_macros-0.2.0/src/btreemap.rs /Users/sam4130/.cargo/registry/src/index.crates.io-6f17d22bba15001f/collection_macros-0.2.0/src/hashset.rs
+
+/Users/sam4130/Documents/GitHub/projector-ts-rust-go/target/debug/deps/collection_macros-f409ebb73144a25e.d: /Users/sam4130/.cargo/registry/src/index.crates.io-6f17d22bba15001f/collection_macros-0.2.0/src/lib.rs /Users/sam4130/.cargo/registry/src/index.crates.io-6f17d22bba15001f/collection_macros-0.2.0/src/hashmap.rs /Users/sam4130/.cargo/registry/src/index.crates.io-6f17d22bba15001f/collection_macros-0.2.0/src/btreemap.rs /Users/sam4130/.cargo/registry/src/index.crates.io-6f17d22bba15001f/collection_macros-0.2.0/src/hashset.rs
+
+/Users/sam4130/.cargo/registry/src/index.crates.io-6f17d22bba15001f/collection_macros-0.2.0/src/lib.rs:
+/Users/sam4130/.cargo/registry/src/index.crates.io-6f17d22bba15001f/collection_macros-0.2.0/src/hashmap.rs:
+/Users/sam4130/.cargo/registry/src/index.crates.io-6f17d22bba15001f/collection_macros-0.2.0/src/btreemap.rs:
+/Users/sam4130/.cargo/registry/src/index.crates.io-6f17d22bba15001f/collection_macros-0.2.0/src/hashset.rs:
