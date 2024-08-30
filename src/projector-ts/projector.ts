@@ -16,6 +16,7 @@ type Value = string | undefined;
 
 const DEFAULT_VALUE = { projector: {} } as ProjectorData;
 export class Projector {
+  [x: string]: any;
   constructor(
     private config: Config,
     private data: ProjectorData = DEFAULT_VALUE
@@ -53,6 +54,14 @@ export class Projector {
 
   deleteValue(key: string) {
     delete this.data.projector[this.config.pwd]?.[key];
+  }
+
+  saved() {
+    const configPath = path.dirname(this.config.config);
+    if (!fs.existsSync(configPath)) {
+      fs.mkdirSync(configPath, { recursive: true });
+    }
+    fs.writeFileSync(this.config.config, JSON.stringify(this.data));
   }
 
   static fromConfig(config: Config): Projector {
