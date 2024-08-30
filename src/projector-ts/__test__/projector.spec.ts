@@ -1,71 +1,69 @@
 import { Operation } from "../config";
-import { Projector } from "../projector";
-
-function getConfig(pwd: string) {
-  return {
-    pwd,
-    config: "/foo/bar/baz",
-    operation: Operation.Add,
-    args: [],
-  };
-}
+import Projector from "../projector";
 
 function getData() {
   return {
     projector: {
-      "/foo/bar/baz/buzz": {
+      "/": {
         foo: "bar1",
+        fem: "is_great",
       },
-      "/foo/bar/baz": {
+      "/foo": {
         foo: "bar2",
       },
       "/foo/bar": {
         foo: "bar3",
       },
-      "/foo": {
-        foo: "bar4",
-      },
-      "/": {
-        foo: "bar5",
-        bar: "bazz1",
-      },
     },
   };
 }
 
-test("getting values", function () {
-  const projector = new Projector(getConfig("/foo/bar"), getData());
+function getProjector(pwd: string, data = getData()): Projector {
+  return new Projector(
+    {
+      args: [],
+      operation: Operation.Print,
+      pwd,
+      config: "Hello, Frontend Masters",
+    },
+    data
+  );
+}
 
-  expect(projector.getValue("foo")).toEqual("bar3");
-  expect(projector.getValue("blaz")).toEqual(undefined);
-  expect(projector.getValue("bar")).toEqual("bazz1");
+test("getValueAll", function () {
+  const proj = getProjector("/foo/bar");
+  expect(proj.getValueAll()).toEqual({
+    fem: "is_great",
+    foo: "bar3",
+  });
 });
 
-test("setting values", function () {
-  const projector = new Projector(getConfig("/foo/bar"), getData());
-
-  expect(projector.getValue("foo")).toEqual("bar3");
-  projector.setValue("foo", "barNever");
-  expect(projector.getValue("foo")).toEqual("barNever");
-
-  const p2 = new Projector(getConfig("/foo"), getData());
-  expect(p2.getValue("foo")).toEqual("bar4");
-
-  const p3 = new Projector(getConfig("/foo/bar/baz"), getData());
-  expect(p3.getValue("foo")).toEqual("bar2");
+test("getValue", function () {
+  let proj = getProjector("/foo/bar");
+  expect(proj.getValue("foo")).toEqual("bar3");
+  proj = getProjector("/foo");
+  expect(proj.getValue("foo")).toEqual("bar2");
+  expect(proj.getValue("fem")).toEqual("is_great");
 });
 
-test("deleting values", function () {
-  const projector = new Projector(getConfig("/foo/bar/baz"), getData());
+test("setValue", function () {
+  let data = getData();
+  let proj = getProjector("/foo/bar", data);
+  proj.setValue("foo", "baz");
 
-  expect(projector.getValue("foo")).toEqual("bar2");
-  projector.deleteValue("foo");
-  expect(projector.getValue("foo")).toEqual("bar3");
-  projector.deleteValue("foo");
-  expect(projector.getValue("foo")).toEqual("bar3");
+  expect(proj.getValue("foo")).toEqual("baz");
+  proj.setValue("fem", "is_better_than_great");
+  expect(proj.getValue("fem")).toEqual("is_better_than_great");
 
-  const p2 = new Projector(getConfig("/foo/bar"), getData());
-  expect(p2.getValue("foo")).toEqual("bar3");
-  p2.deleteValue("foo");
-  expect(p2.getValue("foo")).toEqual("bar4");
+  proj = getProjector("/", data);
+  expect(proj.getValue("fem")).toEqual("is_great");
+});
+
+test("removeValue", function () {
+  const proj = getProjector("/foo/bar");
+  proj.removeValue("fem");
+  expect(proj.getValue("fem")).toEqual("is_great");
+
+  proj.removeValue("foo");
+  expect(proj.getValue("foo")).toEqual("bar2");
 });

@@ -22,7 +22,7 @@ test("should create an add projector config", function () {
 
 test("should remove a projector from config", function () {
   const config = getConfigPath({
-    args: ["remove", "foo"],
+    args: ["rm", "foo"],
   });
   expect(config.operation).toEqual(Operation.Remove);
   expect(config.args).toEqual(["foo"]);

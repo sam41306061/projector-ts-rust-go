@@ -1,6 +1,6 @@
-import getOpts from "../../opts";
+import getOpts from "./opts";
 import getConfg, { Operation } from "./config";
-import { Projector } from "./projector";
+import Projector from "./projector";
 
 const opts = getOpts();
 const config = getConfg(opts);
@@ -19,13 +19,13 @@ if (config.operation === Operation.Print) {
 
 if (config.operation === Operation.Add) {
   proj.setValue(config.args[0], config.args[1]);
-  proj.saved();
+  proj.save();
   console.log("added");
 }
 
 if (config.operation === Operation.Remove) {
   proj.setValue(config.args[0], config.args[1]);
-  proj.saved();
+  proj.save();
   console.log("added");
 }
 console.log(getOpts());

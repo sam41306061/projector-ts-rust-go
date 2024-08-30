@@ -1,62 +1,81 @@
-import fs from "fs";
-import path from "path";
 import { Config } from "./config";
+import * as fs from "fs";
+import * as path from "path";
 
-type ProjectorData = {
-  // todo: if we had other top level items, we could put them here
-  // such as settings or links
+export type Data = {
   projector: {
+    // pwd
     [key: string]: {
+      // key       -> value
       [key: string]: string;
     };
   };
 };
 
-type Value = string | undefined;
+const defaultData = {
+  projector: {},
+};
 
-const DEFAULT_VALUE = { projector: {} } as ProjectorData;
-export class Projector {
-  [x: string]: any;
-  constructor(
-    private config: Config,
-    private data: ProjectorData = DEFAULT_VALUE
-  ) {}
+export default class Projector {
+  constructor(private config: Config, private data: Data) {}
 
-  getValue(key: string): Value {
-    // pwd
-    // dirname(pwd) until empty
-    let prev: Value = undefined;
+  getValueAll(): { [key: string]: string } {
     let curr = this.config.pwd;
+    let prev = "";
 
-    let out: Value = undefined;
+    const paths: string[] = [];
     do {
-      let val = this.data.projector[curr]?.[key];
-      if (val !== undefined) {
-        out = val;
+      prev = curr;
+      paths.push(curr);
+      curr = path.dirname(curr);
+    } while (curr != prev);
+
+    return paths.reverse().reduce((acc, path) => {
+      const value = this.data.projector[path];
+      if (value) {
+        Object.assign(acc, value);
+      }
+
+      return acc;
+    }, {});
+  }
+
+  getValue(key: string): string | undefined {
+    let curr = this.config.pwd;
+    let prev = "";
+
+    let out: string | undefined = undefined;
+    do {
+      const value = this.data.projector[curr]?.[key];
+      if (value) {
+        out = value;
         break;
       }
 
       prev = curr;
       curr = path.dirname(curr);
-    } while (prev !== curr);
+    } while (curr != prev);
 
     return out;
   }
 
   setValue(key: string, value: string) {
-    let pwd = this.config.pwd;
-    if (!this.data.projector[pwd]) {
-      this.data.projector[pwd] = {};
+    let dir = this.data.projector[this.config.pwd];
+    if (!dir) {
+      dir = this.data.projector[this.config.pwd] = {};
     }
 
-    this.data.projector[pwd][key] = value;
+    dir[key] = value;
   }
 
-  deleteValue(key: string) {
-    delete this.data.projector[this.config.pwd]?.[key];
+  removeValue(key: string) {
+    const dir = this.data.projector[this.config.pwd];
+    if (dir) {
+      delete dir[key];
+    }
   }
 
-  saved() {
+  save() {
     const configPath = path.dirname(this.config.config);
     if (!fs.existsSync(configPath)) {
       fs.mkdirSync(configPath, { recursive: true });
@@ -65,17 +84,17 @@ export class Projector {
   }
 
   static fromConfig(config: Config): Projector {
-    //@ts-ignore
-    let data: ProjectorData = undefined;
-    try {
-      if (fs.existsSync(config.config)) {
-        data = JSON.parse(fs.readFileSync(config.config).toString());
-      }
-    } catch {
+    if (fs.existsSync(config.config)) {
       //@ts-ignore
-      data = undefined;
+      let data: Data = undefined;
+      try {
+        data = JSON.parse(fs.readFileSync(config.config).toString());
+      } catch (e) {
+        data = defaultData;
+      }
+      return new Projector(config, data);
     }
 
-    return new Projector(config, data);
+    return new Projector(config, defaultData);
   }
 }
