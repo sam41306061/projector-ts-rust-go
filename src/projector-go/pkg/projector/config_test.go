@@ -1,10 +1,9 @@
 package projector_test
 
 import (
+	"projects/projector-go/src/projector-go/pkg/projector"
 	"reflect"
 	"testing"
-
-	"projects/projector-go/src/projector-go/pkg/projector"
 )
 
 func getOpts(args []string) *projector.Opts {
