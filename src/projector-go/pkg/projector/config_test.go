@@ -1,71 +1,52 @@
 package projector_test
 
 import (
-	"testing"
-
-	"log"
 	"projects/projector-go/src/projector-go/pkg/projector"
+	"reflect"
+	"testing"
 )
 
-func TestConfigPrint(t *testing.T) {
-    opts := projector.ProjectorOpts {
-        Config: "",
-        Pwd: "",
-        Arguments: []string{},
-    }
-
-    config, err := projector.NewConfig(&opts)
-
-    if err != nil {
-        t.Errorf("error returned from projector config %v", err)
-    }
-
-    if config.Operation != projector.Print {
-        t.Errorf("operation expected was print but got %v", config.Operation)
-    }
-}
-
-func TestConfigAdd(t *testing.T) {
-    opts := projector.ProjectorOpts {
-        Config: "",
-        Pwd: "",
-        Arguments: []string{"add", "foo", "bar"},
-    }
-
-    config, err := projector.NewConfig(&opts)
-
-    if err != nil {
-        t.Errorf("error returned from projector config %v", err)
-    }
-
-    if config.Operation != projector.Add {
-        t.Errorf("operation expected was add but got %v", config.Operation)
-    }
-
-    if config.Args[0] != "foo" || config.Args[1] != "bar" {
-        t.Errorf("expected arguments to equal {'foo', 'bar'} but got %+v", config.Args)
-    }
-}
-
-func TestConfigRemove(t *testing.T) {
-	opts := projector.ProjectorOpts {
+func getOpts(args []string) *projector.Opts {
+	opts := &projector.Opts{
+		Args:   args,
 		Config: "",
-		Pwd: "",
-		Arguments: []string{"remove", "foo", "bar"},
+		Pwd:    "",
 	}
-	config, err := projector.NewConfig(&opts)
-    log.Printf("Error: %v", err)
-    log.Printf("Config: %v", config)
-    log.Printf("Args: %v", config.Args)
-    log.Printf("Args: %v", config.Args[0])
+	return opts
+}
 
+func testConfig(t *testing.T, args []string, expectedArgs []string, operation projector.Operation) {
+	opts := getOpts(args)
+    config, err := projector.NewConfig(opts)
 
     if err != nil {
-        t.Errorf("error returned from projector config %v", err)
+        t.Errorf("expected to get no error %v", err)
     }
 
-    if config.Operation != projector.Remove {
-        t.Errorf("operation expected was remove but got %v", config.Operation)
+    if !reflect.DeepEqual(expectedArgs, config.Args) {
+        t.Errorf("expected args to %+v but got %+v", expectedArgs, config.Args)
     }
 
+    if config.Operation != operation {
+        t.Errorf("operation expect was %v but got %v", operation, config.Operation)
+    }
 }
+
+func TestConfigPrint(t *testing.T) {
+    testConfig(t, []string{}, []string{}, projector.Print)
+}
+
+func TestConfigPrintKey(t *testing.T) {
+    testConfig(t, []string{"foo"}, []string{"foo"}, projector.Print)
+}
+
+func TestConfigAddKeyValue(t *testing.T) {
+    testConfig(t, []string{"add", "foo", "bar"}, []string{"foo", "bar"}, projector.Add)
+}
+
+func TestConfigRemoveKey(t *testing.T) {
+    testConfig(t, []string{"rm", "foo"}, []string{"foo"}, projector.Remove)
+}
+
+
+
